@@ -4,11 +4,6 @@ from typing import List
 
 DNA_LENGTH = 5
 
-CARTRIDGES = {
-    0: "BLUE #1",
-    1: "YELLOW #2",
-    2: "RED: #3",
-}
 
 # These symbols are used in print_genome function
 GENES = [
