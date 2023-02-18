@@ -9,6 +9,9 @@ class CellIndex:
     row: int
     column: int
 
+    def __hash__(self) -> int:
+        return (self.row, self.column).__hash__()
+
 
 def get_box_by_cell(cell: CellIndex) -> CellIndex:
     """Calculate upper-left point of given box."""
