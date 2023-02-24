@@ -4,33 +4,35 @@ from typing import Set, Tuple
 class SudokuCanvas:
     def __init__(self) -> None:
         self.canvas = [[" " for column in range(49)] for row in range(37)]
+        self._draw_borders()
 
+    def _draw_borders(self) -> None:  # pragma: no cover
         self._add_horizontal_lines()
         self._add_vertical_lines()
         self._add_crosses()
         self._add_corners()
         self._add_t_junctions()
 
-    def _add_horizontal_lines(self) -> None:
+    def _add_horizontal_lines(self) -> None:  # pragma: no cover
         for h_line in range(4):
             for column in range(49):
                 self.canvas[h_line * 12][column] = "─"
 
-    def _add_vertical_lines(self) -> None:
+    def _add_vertical_lines(self) -> None:  # pragma: no cover
         for v_line in range(4):
             for row in range(37):
                 self.canvas[row][v_line * 16] = "│"
 
-    def _add_crosses(self) -> None:
+    def _add_crosses(self) -> None:  # pragma: no cover
         for h_line in range(1, 3):
             for v_line in range(1, 3):
                 self.canvas[h_line * 12][v_line * 16] = "┼"
 
-    def _add_corners(self) -> None:
+    def _add_corners(self) -> None:  # pragma: no cover
         self.canvas[0][0], self.canvas[0][48] = "┌", "┐"
         self.canvas[36][0], self.canvas[36][48] = "└", "┘"
 
-    def _add_t_junctions(self) -> None:
+    def _add_t_junctions(self) -> None:  # pragma: no cover
         for v_line in range(1, 3):
             self.canvas[0][v_line * 16] = "┬"
 
@@ -70,11 +72,11 @@ class SudokuCanvas:
 
         self.canvas[i + 1][j + 1] = str(value)
 
-    def write_unsolved(self, row: int, column: int, values: Set[int]) -> None:
+    def write_unsolved(self, row: int, column: int, candidates: Set[int]) -> None:
         self._clean_cell(row, column)
 
         i, j = self._get_cell_index(row, column)
 
         for v in range(1, 10):
             i_offset, j_offset = divmod(v - 1, 3)
-            self.canvas[i + i_offset][j + j_offset] = str(v) if v in values else "."
+            self.canvas[i + i_offset][j + j_offset] = str(v) if v in candidates else "."
