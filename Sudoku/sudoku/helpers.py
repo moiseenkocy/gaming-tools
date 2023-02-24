@@ -51,3 +51,13 @@ def get_neighbours_in_column(cell: CellIndex) -> List[CellIndex]:
 def get_neighbours_in_box(cell: CellIndex) -> List[CellIndex]:
     """Calculate all neighbours in given box."""
     return list(filter(cell.__ne__, get_cells_in_box(cell)))
+
+
+def get_all_neighbours(cell: CellIndex) -> List[CellIndex]:
+    return list(
+        set(
+            get_neighbours_in_row(cell)
+            + get_neighbours_in_column(cell)
+            + get_neighbours_in_box(cell)
+        )
+    )
