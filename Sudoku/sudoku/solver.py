@@ -10,7 +10,6 @@ class SudokuSolver:
         self.puzzle = SudokuPuzzle(puzzle)
 
         self.strategies = [
-            self.find_solved_cell,
             self.hidden_singles,
             self.naked_pairs,
             self.naked_triples,
@@ -25,7 +24,7 @@ class SudokuSolver:
                 break
 
     # Strategies
-    def find_solved_cell(self) -> bool:
+    def hidden_singles(self) -> bool:
         for row in range(9):
             for column in range(9):
                 cell = self.puzzle[row][column]
@@ -35,9 +34,6 @@ class SudokuSolver:
                 for ni in get_all_neighbours(CellIndex(row=row, column=column)):
                     self.puzzle[ni.row][ni.column].discard(cell.value)
                 return True
-        return False
-
-    def hidden_singles(self) -> bool:
         return False
 
     def naked_pairs(self) -> bool:
